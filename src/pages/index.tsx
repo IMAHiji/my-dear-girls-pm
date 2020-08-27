@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import Button from '@material-ui/core/Button';
 import Layout from '../components/Layout';
 import PostPreview from '../components/PostPreview';
 
@@ -14,6 +15,12 @@ const IndexPage = ({ data: { allPrismicPost, prismicHomepage } }: any) => {
         <h1>{homePageData.title.text}</h1>
         <Img fluid={homePageData.homepage_hero.fluid} />
         <p>{homePageData.content.text}</p>
+        <Button variant="contained" color="primary">
+          Primary
+        </Button>
+        <Button variant="contained" color="secondary">
+          Secondary
+        </Button>
         <h3>Latest Books:</h3>
 
         <PostPreview nodes={posts} />

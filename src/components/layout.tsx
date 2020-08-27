@@ -6,13 +6,12 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import 'fontsource-roboto';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { useStaticQuery, graphql } from 'gatsby';
-
 import Header from './header';
-import './layout.css';
 
-const Layout = ({ children }) => {
+const Layout = ({ children }: any) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -25,6 +24,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <CssBaseline />
       <Header siteTitle={data.site.siteMetadata.title} />
       <div
         style={{
@@ -37,10 +37,6 @@ const Layout = ({ children }) => {
       </div>
     </>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default Layout;
