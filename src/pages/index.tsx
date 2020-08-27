@@ -1,7 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import Layout from '../components/layout';
 import PostPreview from '../components/PostPreview';
 
@@ -12,18 +13,18 @@ const IndexPage = ({ data: { allPrismicPost, prismicHomepage } }: any) => {
   return (
     <>
       <Layout>
-        <h1>{homePageData.title.text}</h1>
-        <Img fluid={homePageData.homepage_hero.fluid} />
-        <p>{homePageData.content.text}</p>
-        <Button variant="contained" color="primary">
-          Primary
-        </Button>
-        <Button variant="contained" color="secondary">
-          Secondary
-        </Button>
-        <h3>Latest Books:</h3>
+        <Grid container justify="center">
+          <Grid item xs={12}>
+            <Typography variant="h1">{homePageData.title.text}</Typography>
+            <Img fluid={homePageData.homepage_hero.fluid} />
+          </Grid>
+          {homePageData.content.text && <p>{homePageData.content.text}</p>}
+          <Grid item xs={10}>
+            <h3>Latest Books:</h3>
 
-        <PostPreview nodes={posts} />
+            <PostPreview nodes={posts} />
+          </Grid>
+        </Grid>
       </Layout>
     </>
   );
