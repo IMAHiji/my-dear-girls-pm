@@ -1,16 +1,16 @@
 import React from "react"
 import { graphql } from "gatsby"
+import Layout from '../layout'
 import SliceParser from '../SliceParser';
 
 const Post = ({ data: { prismicPost } }) => {
   const { data } = prismicPost
-  console.log(data)
   return (
-    <React.Fragment>
+    <Layout>
  
-     <h1>I am a post for {data.title.text} </h1>
+     <h1>{data.title.text} </h1>
      <SliceParser slices={data.body}/>
-    </React.Fragment>
+    </Layout>
   )
 }
 export default Post

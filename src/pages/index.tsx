@@ -5,15 +5,15 @@ import Layout from '../components/layout'
 import Image from '../components/image'
 import SEO from '../components/seo'
 
-const IndexPage = ({ data:{allPrismicPost} }) => {
-  const posts = allPrismicPost.nodes
-  
+const IndexPage = ({ data:{allPrismicPost, prismicHomepage} }) => {
+  const {nodes:posts} = allPrismicPost
+  const homePageData = prismicHomepage.data
   return (
     <>
       <Layout>
         <SEO title="Home" />
-        <h1>Home</h1>
-        <h2>My Dear Girls</h2>
+        <h1>{homePageData.title.text}</h1>
+        <p>{homePageData.content.text}</p>
         <h3>Posts:</h3>
         <ul>
         {posts.map((post:any)=> {
@@ -32,6 +32,16 @@ export default IndexPage
 
 export const indexPageQuery = graphql`
   query postList {
+    prismicHomepage {
+    data {
+      content {
+        text
+      }
+      title {
+        text
+      }
+    }
+  }
     allPrismicPost {
     nodes {
       uid
