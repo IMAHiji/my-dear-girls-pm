@@ -22,7 +22,7 @@ const IndexPage = ({ data:{allPrismicPost, prismicHomepage} }) => {
           )
         })  }
         </ul>
-        <Link to="/page-2/">Go to page 2</Link> <br />
+        
       </Layout>
     </>
   )
