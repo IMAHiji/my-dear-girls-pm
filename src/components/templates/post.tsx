@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../Layout';
+import Layout from '../layout';
 import SliceParser from '../SliceParser';
 
 const Post = ({ data: { prismicPost } }: any) => {

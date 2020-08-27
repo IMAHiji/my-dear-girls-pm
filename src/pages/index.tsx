@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import Button from '@material-ui/core/Button';
-import Layout from '../components/Layout';
+import Layout from '../components/layout';
 import PostPreview from '../components/PostPreview';
 
 const IndexPage = ({ data: { allPrismicPost, prismicHomepage } }: any) => {
