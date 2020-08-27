@@ -1,9 +1,9 @@
 import React from 'react';
 import Img from 'gatsby-image';
 
-const Image = ({image}) => {
-  const fluid = image.primary.image.fluid
-  return(<Img fluid={fluid} />)
-}
+const Image = ({ image }: any) => {
+  const { fluid } = image.primary.image;
+  return <Img fluid={fluid} />;
+};
 
-export default Image
+export default Image;

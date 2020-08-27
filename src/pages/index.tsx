@@ -1,71 +1,70 @@
-import React from 'react'
-import { Link, graphql } from 'gatsby'
+import React from 'react';
+import { Link, graphql } from 'gatsby';
+import Img from 'gatsby-image';
+import Layout from '../components/Layout';
+import PostPreview from '../components/PostPreview';
 
-import Layout from '../components/layout'
-import Img from "gatsby-image"
-import SEO from '../components/seo'
+const IndexPage = ({ data: { allPrismicPost, prismicHomepage } }: any) => {
+  const posts = allPrismicPost.edges;
+  const homePageData = prismicHomepage.data;
 
-const IndexPage = ({ data:{allPrismicPost, prismicHomepage} }) => {
-  const {nodes:posts} = allPrismicPost
-  const homePageData = prismicHomepage.data
-  console.log(homePageData)
   return (
     <>
       <Layout>
-        <SEO title="Home" />
         <h1>{homePageData.title.text}</h1>
-        <Img fluid={homePageData.homepage_hero.fluid}/>
+        <Img fluid={homePageData.homepage_hero.fluid} />
         <p>{homePageData.content.text}</p>
-        <h3>Posts:</h3>
-        <ul>
-        {posts.map((post:any)=> {
-          return(
-          <li key={post.uid}><Link to={post.uid} >{post.data.title.text}</Link></li>
-          )
-        })  }
-        </ul>
-        
+        <h3>Latest Books:</h3>
+
+        <PostPreview nodes={posts} />
       </Layout>
     </>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
 
 export const indexPageQuery = graphql`
   query postList {
     prismicHomepage {
-    data {
-      content {
-        text
-      }
-      title {
-        text
-      }
-      homepage_hero {
-        fluid {
-          aspectRatio
-          base64
-          sizes
-          src
-          srcSet
-        }
-      }
-    }
-  }
-    allPrismicPost {
-    nodes {
-      uid
-      url
-      href
       data {
+        content {
+          text
+        }
         title {
           text
-          raw
-          html
+        }
+        homepage_hero {
+          fluid {
+            aspectRatio
+            base64
+            sizes
+            src
+            srcSet
+          }
+        }
+      }
+    }
+    allPrismicPost {
+      edges {
+        node {
+          uid
+          data {
+            title {
+              text
+            }
+            featured_image {
+              fluid {
+                aspectRatio
+                base64
+                sizes
+                src
+                srcSet
+              }
+            }
+          }
         }
       }
     }
   }
-  }
-`
+`;

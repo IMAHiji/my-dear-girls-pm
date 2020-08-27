@@ -1,9 +1,9 @@
 require('dotenv').config({
   path: `.env`,
-})
-const categorySchema = require('./schemas/category.json')
-const homePageSchema = require('./schemas/homepage.json')
-const postSchema = require('./schemas/post.json')
+});
+const categorySchema = require('./schemas/category.json');
+const homePageSchema = require('./schemas/homepage.json');
+const postSchema = require('./schemas/post.json');
 
 module.exports = {
   siteMetadata: {
@@ -13,6 +13,16 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-typescript`,
+    {
+      resolve: 'gatsby-plugin-material-ui',
+      // If you want to use styled components you should change the injection order.
+      options: {
+        // stylesProvider: {
+        //   injectFirst: true,
+        // },
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -41,7 +51,7 @@ module.exports = {
         // provided to the function, as seen below. This allows you to use
         // different link resolver logic for each field if necessary.
         // See: https://prismic.io/docs/javascript/query-the-api/link-resolving
-        linkResolver: ({ node, key, value }) => doc => {
+        linkResolver: ({ node, key, value }) => (doc) => {
           // Your link resolver
         },
 
@@ -100,4 +110,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};
