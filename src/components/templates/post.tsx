@@ -27,8 +27,10 @@ export const postQuery = graphql`
           id
           slice_type
           slice_label
-          internal {
-            content
+          primary {
+            quote {
+              html
+            }
           }
         }
         ... on PrismicPostBodyText {
