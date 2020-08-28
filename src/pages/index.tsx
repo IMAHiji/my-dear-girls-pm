@@ -20,7 +20,7 @@ const IndexPage = ({ data: { allPrismicPost, prismicHomepage } }: any) => {
   const homePageData = prismicHomepage.data;
   const homepageHero = homePageData.homepage_hero.fluid.src;
   const { homeHeroWrapper } = useStyles(homepageHero);
-  console.log(homepageHero);
+
   return (
     <>
       <Layout>
@@ -42,8 +42,10 @@ const IndexPage = ({ data: { allPrismicPost, prismicHomepage } }: any) => {
               {homePageData.title.text}
             </Typography>
           </Grid>
-          {homePageData.content.text && <p>{homePageData.content.text}</p>}
-          <Grid item xs={10}>
+          <Grid item xs={12}>
+            {homePageData.content.text && <p>{homePageData.content.text}</p>}
+          </Grid>
+          <Grid item xs={10} justify="flex-start" alignContent="center" alignItems="center" container direction="row">
             <PostPreview nodes={posts} />
           </Grid>
         </Grid>
