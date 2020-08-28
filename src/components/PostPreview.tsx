@@ -40,8 +40,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const returnTextPreview = (text: string) => {
   const maxLength = 200;
   const ending = '...';
-
-  console.log(text);
   if (text.length > maxLength) {
     return text.substring(0, maxLength - ending.length) + ending;
   }
@@ -49,10 +47,7 @@ const returnTextPreview = (text: string) => {
 };
 
 const PostPreview = ({ nodes }: any) => {
-  console.log(nodes);
   const { postPreviewItem, postLinkElement, postFeaturedImage, postPreviewContent } = useStyles();
-
-  // console.log('text', nodes[0].node.data.body[0].primary.text.text);
   return (
     <>
       {nodes.map((post: any) => (
