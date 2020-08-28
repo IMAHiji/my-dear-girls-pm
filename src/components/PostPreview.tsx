@@ -6,10 +6,8 @@ const PostPreview = ({ nodes }: any) => {
   return (
     <ul className="postPreviewContainer">
       {nodes.map((post: any) => (
-        <li>
-          <Link key={post.node.uid} to={post.node.uid}>
-            {post.node.data.title.text}{' '}
-          </Link>
+        <li key={post.node.uid}>
+          <Link to={post.node.uid}>{post.node.data.title.text} </Link>
         </li>
       ))}
     </ul>
