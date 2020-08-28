@@ -85,6 +85,16 @@ export const indexPageQuery = graphql`
             title {
               text
             }
+            body {
+              ... on PrismicPostBodyText {
+                id
+                primary {
+                  text {
+                    text
+                  }
+                }
+              }
+            }
             featured_image {
               fluid {
                 aspectRatio

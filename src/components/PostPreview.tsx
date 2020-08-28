@@ -1,39 +1,83 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import Img from 'gatsby-image';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import Typography from '@material-ui/core/Typography';
+
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  postPreviewWrapper: {
-    // display: 'flex',
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-  },
   postPreviewItem: {
-    width: '250px',
-    maxWidth: '250px',
+    width: '350px',
+    maxWidth: '350px',
     height: '350px',
     maxHeight: '350px',
-    border: '1px solid black',
-    // display: 'flex',
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    boxShadow: theme.shadows[5],
     margin: theme.spacing(6),
   },
+  postLinkElement: {
+    width: '100%',
+    height: '100%',
+    textDecoration: 'none',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+  },
+  postFeaturedImage: {
+    height: '175px',
+    minHeight: '50%',
+
+    flexGrow: 1,
+  },
+  postPreviewContent: {
+    height: '175px',
+    minHeight: '50%',
+    flexGrow: 1,
+    padding: theme.spacing(2),
+  },
 }));
+
+const returnTextPreview = (text: string) => {
+  const maxLength = 200;
+  const ending = '...';
+
+  console.log(text);
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength - ending.length) + ending;
+  }
+  return text + ending;
+};
+
 const PostPreview = ({ nodes }: any) => {
   console.log(nodes);
-  const { postPreviewWrapper, postPreviewItem } = useStyles();
+  const { postPreviewItem, postLinkElement, postFeaturedImage, postPreviewContent } = useStyles();
 
+  // console.log('text', nodes[0].node.data.body[0].primary.text.text);
   return (
     <>
       {nodes.map((post: any) => (
         <Grid key={post.node.uid} className={postPreviewItem} item xs={1} md={6}>
-          <Link to={post.node.uid}>{post.node.data.title.text}</Link>
+          <Grid container direction="column" justify="space-between" alignContent="center">
+            <Link to={post.node.uid} className={postLinkElement}>
+              <Grid
+                item
+                className={postFeaturedImage}
+                style={{
+                  backgroundImage: `url(${post.node.data.featured_image.fluid.src})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'top',
+                }}
+              />
+              <Grid item className={postPreviewContent}>
+                <Typography variant="h5" component="h3" color="textPrimary">
+                  {post.node.data.title.text}
+                </Typography>
+                <Typography variant="body1" color="textPrimary">
+                  {returnTextPreview(post.node.data.body[0].primary.text.text)}
+                </Typography>
+              </Grid>
+            </Link>
+          </Grid>
         </Grid>
       ))}
     </>
