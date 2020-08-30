@@ -1,17 +1,25 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import Grid from '@material-ui/core/Grid/';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Layout from '../layout';
 import SliceParser from '../SliceParser';
 
+const useStyles = makeStyles((theme: Theme) => ({
+  featuredImage: {},
+}));
 const Post = ({ data: { prismicPost } }: any) => {
   const { data } = prismicPost;
+  const { featuredImage } = useStyles();
   return (
     <Layout>
       <Grid container justify="center" item xs={10}>
         <Typography variant="h1">{data.title.text} </Typography>
-
+        <Grid item xs={3} className={featuredImage}>
+          <Img fluid={data.featured_image.fluid} />
+        </Grid>
         <SliceParser slices={data.body} />
       </Grid>
     </Layout>
@@ -23,6 +31,15 @@ export const postQuery = graphql`
     prismicPost(uid: { eq: $uid }) {
       uid
       data {
+        featured_image {
+          fluid {
+            src
+            srcSet
+            sizes
+            base64
+            aspectRatio
+          }
+        }
         title {
           text
         }
