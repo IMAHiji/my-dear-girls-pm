@@ -9,6 +9,7 @@ import React from 'react';
 import 'fontsource-roboto';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useStaticQuery, graphql } from 'gatsby';
+import Grid from '@material-ui/core/Grid';
 import Header from './header';
 
 const Layout = ({ children }: any) => {
@@ -23,13 +24,13 @@ const Layout = ({ children }: any) => {
   `);
 
   return (
-    <>
+    <Grid container item xs={12}>
       <CssBaseline />
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div>
-        <main>{children}</main>
-      </div>
-    </>
+      <Grid container item xs={12} role="main" justify="center">
+        {children}
+      </Grid>
+    </Grid>
   );
 };
 

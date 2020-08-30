@@ -1,5 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Grid from '@material-ui/core/Grid/';
+import Typography from '@material-ui/core/Typography';
 import Layout from '../layout';
 import SliceParser from '../SliceParser';
 
@@ -7,8 +9,11 @@ const Post = ({ data: { prismicPost } }: any) => {
   const { data } = prismicPost;
   return (
     <Layout>
-      <h1>{data.title.text} </h1>
-      <SliceParser slices={data.body} />
+      <Grid container justify="center" item xs={10}>
+        <Typography variant="h1">{data.title.text} </Typography>
+
+        <SliceParser slices={data.body} />
+      </Grid>
     </Layout>
   );
 };

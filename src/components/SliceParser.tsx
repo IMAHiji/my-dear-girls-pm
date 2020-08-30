@@ -17,6 +17,6 @@ const SliceParser = ({ slices }: any) => {
     }
   });
 
-  return <div>{parsedSlice}</div>;
+  return <>{parsedSlice}</>;
 };
 export default SliceParser;
