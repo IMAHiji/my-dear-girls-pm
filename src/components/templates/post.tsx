@@ -15,9 +15,11 @@ const Post = ({ data: { prismicPost } }: any) => {
   const { featuredImage } = useStyles();
   return (
     <Layout>
-      <Grid container justify="center" item xs={10}>
-        <Typography variant="h1">{data.title.text} </Typography>
-        <Grid item xs={3} className={featuredImage}>
+      <Grid container justify="center" item xs={10} direction="row">
+        <Grid container item xs={12} className={featuredImage} justify="center">
+          <Typography variant="h1">{data.title.text} </Typography>
+        </Grid>
+        <Grid item xs={4} className={featuredImage}>
           <Img fluid={data.featured_image.fluid} />
         </Grid>
         <SliceParser slices={data.body} />
