@@ -13,13 +13,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100vw',
     height: '50vh',
   },
+  homeText: {
+    margin: theme.spacing(2),
+  },
 }));
 
 const IndexPage = ({ data: { allPrismicPost, prismicHomepage } }: any) => {
   const posts = allPrismicPost.edges;
   const homePageData = prismicHomepage.data;
   const homepageHero = homePageData.homepage_hero.fluid.src;
-  const { homeHeroWrapper } = useStyles(homepageHero);
+  const { homeHeroWrapper, homeText } = useStyles(homepageHero);
 
   return (
     <>
@@ -34,7 +37,7 @@ const IndexPage = ({ data: { allPrismicPost, prismicHomepage } }: any) => {
             style={{
               backgroundImage: `url(${homepageHero})`,
               backgroundSize: 'cover',
-              backgroundPosition: 'bottom -100px center',
+              backgroundPosition: 'bottom 5% center',
               alignItems: 'center',
             }}
           >
@@ -42,10 +45,15 @@ const IndexPage = ({ data: { allPrismicPost, prismicHomepage } }: any) => {
               {homePageData.title.text}
             </Typography>
           </Grid>
-          <Grid item xs={12}>
-            {homePageData.content.text && <p>{homePageData.content.text}</p>}
-          </Grid>
-          <Grid item xs={10} justify="flex-start" alignContent="center" alignItems="center" container direction="row">
+
+          <Grid item xs={10} justify="center" alignContent="center" alignItems="center" container direction="row">
+            <Grid item xs={12}>
+              {homePageData.content.text && (
+                <Typography variant="body1" className={homeText}>
+                  {homePageData.content.text}
+                </Typography>
+              )}
+            </Grid>
             <PostPreview nodes={posts} />
           </Grid>
         </Grid>

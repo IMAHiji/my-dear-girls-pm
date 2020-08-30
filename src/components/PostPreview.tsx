@@ -8,12 +8,13 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme: Theme) => ({
   postPreviewItem: {
-    width: '350px',
-    maxWidth: '350px',
-    height: '350px',
-    maxHeight: '350px',
+    width: '250px',
+    maxWidth: '250px',
+    minWidth: '250px',
+    height: '450px',
+    maxHeight: '450px',
     boxShadow: theme.shadows[5],
-    margin: theme.spacing(6),
+    margin: theme.spacing(2),
   },
   postLinkElement: {
     width: '100%',
