@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const makeAuthorData = (rawAuthorData: any) => {
   const authorArray: any = [];
-  // console.log('Author Data', rawAuthorData);
   rawAuthorData.forEach((edge: any) => {
     const authorObject: { name: string; url: string } = { name: '', url: '' };
     authorObject.name = edge.node.data.author_name;
@@ -28,9 +27,22 @@ const makeAuthorData = (rawAuthorData: any) => {
   return authorArray;
 };
 
-const Post = ({ data: { prismicPost, allPrismicAuthor } }: any) => {
+const makeIllustratorData = (rawIllustratorData: any) => {
+  const illustratorArray: any = [];
+  rawIllustratorData.forEach((edge: any) => {
+    const illustratorObject: { name: string; url: string } = { name: '', url: '' };
+    illustratorObject.name = edge.node.data.illustrator_name;
+    illustratorObject.url = edge.node.data.illustrator_link.url;
+    illustratorArray.push(illustratorObject);
+  });
+
+  return illustratorArray;
+};
+
+const Post = ({ data: { prismicPost, allPrismicAuthor, allPrismicIllustrator } }: any) => {
   const authorData = makeAuthorData(allPrismicAuthor.edges);
-  console.log(authorData);
+  const illustratorData = makeIllustratorData(allPrismicIllustrator.edges);
+  console.log(illustratorData);
   const { data } = prismicPost;
   const { featuredImage, postInfo } = useStyles();
   return (
@@ -40,7 +52,7 @@ const Post = ({ data: { prismicPost, allPrismicAuthor } }: any) => {
           <Img fluid={data.featured_image.fluid} />
         </Grid>
         <Grid container item className={featuredImage} justify="center">
-          <BookInformation authorData={authorData} title={data.title.text} />
+          <BookInformation authorData={authorData} illustratorData={illustratorData} title={data.title.text} />
         </Grid>
 
         <SliceParser slices={data.body} />
@@ -129,6 +141,18 @@ export const postQuery = graphql`
           data {
             author_name
             author_link {
+              url
+            }
+          }
+        }
+      }
+    }
+    allPrismicIllustrator(filter: { id: $id }) {
+      edges {
+        node {
+          data {
+            illustrator_name
+            illustrator_link {
               url
             }
           }
