@@ -4,7 +4,7 @@ import Img from 'gatsby-image';
 import Grid from '@material-ui/core/Grid/';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Author from '../Author';
+import BookInformation from '../BookInformation';
 import Layout from '../layout';
 import SliceParser from '../SliceParser';
 
@@ -39,12 +39,10 @@ const Post = ({ data: { prismicPost, allPrismicAuthor } }: any) => {
         <Grid item xs={4} className={featuredImage}>
           <Img fluid={data.featured_image.fluid} />
         </Grid>
-        <Grid container item xs={12} className={featuredImage} justify="center">
-          <Typography variant="h2">{data.title.text} </Typography>
+        <Grid container item className={featuredImage} justify="center">
+          <BookInformation authorData={authorData} title={data.title.text} />
         </Grid>
-        <Grid container item xs={12} className={postInfo} justify="center">
-          <Author authorData={authorData} />
-        </Grid>
+
         <SliceParser slices={data.body} />
       </Grid>
     </Layout>
