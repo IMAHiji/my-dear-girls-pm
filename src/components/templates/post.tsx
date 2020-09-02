@@ -4,23 +4,46 @@ import Img from 'gatsby-image';
 import Grid from '@material-ui/core/Grid/';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Author from '../Author';
 import Layout from '../layout';
 import SliceParser from '../SliceParser';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  featuredImage: {},
+  featuredImage: {
+    margin: theme.spacing(2, 0),
+  },
+  postInfo: {},
 }));
-const Post = ({ data: { prismicPost } }: any) => {
+
+const makeAuthorData = (rawAuthorData: any) => {
+  const authorArray: any = [];
+  // console.log('Author Data', rawAuthorData);
+  rawAuthorData.forEach((edge: any) => {
+    const authorObject: { name: string; url: string } = { name: '', url: '' };
+    authorObject.name = edge.node.data.author_name;
+    authorObject.url = edge.node.data.author_link.url;
+    authorArray.push(authorObject);
+  });
+
+  return authorArray;
+};
+
+const Post = ({ data: { prismicPost, allPrismicAuthor } }: any) => {
+  const authorData = makeAuthorData(allPrismicAuthor.edges);
+  console.log(authorData);
   const { data } = prismicPost;
-  const { featuredImage } = useStyles();
+  const { featuredImage, postInfo } = useStyles();
   return (
     <Layout>
       <Grid container justify="center" item xs={10} direction="row">
-        <Grid container item xs={12} className={featuredImage} justify="center">
-          <Typography variant="h1">{data.title.text} </Typography>
-        </Grid>
         <Grid item xs={4} className={featuredImage}>
           <Img fluid={data.featured_image.fluid} />
+        </Grid>
+        <Grid container item xs={12} className={featuredImage} justify="center">
+          <Typography variant="h2">{data.title.text} </Typography>
+        </Grid>
+        <Grid container item xs={12} className={postInfo} justify="center">
+          <Author authorData={authorData} />
         </Grid>
         <SliceParser slices={data.body} />
       </Grid>
@@ -29,8 +52,8 @@ const Post = ({ data: { prismicPost } }: any) => {
 };
 export default Post;
 export const postQuery = graphql`
-  query PostBySlug($uid: String!) {
-    prismicPost(uid: { eq: $uid }) {
+  query PostBySlug($id: StringQueryOperatorInput = {}) {
+    prismicPost(uid: { eq: "the-princess-and-the-giant" }) {
       uid
       data {
         featured_image {
@@ -83,6 +106,32 @@ export const postQuery = graphql`
                   srcSet
                 }
               }
+            }
+          }
+        }
+        author {
+          id
+          raw
+          url
+          lang
+          link_type
+          size
+          slug
+          tags
+          target
+          type
+          uid
+          isBroken
+        }
+      }
+    }
+    allPrismicAuthor(filter: { id: $id }) {
+      edges {
+        node {
+          data {
+            author_name
+            author_link {
+              url
             }
           }
         }

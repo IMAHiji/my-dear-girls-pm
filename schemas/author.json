@@ -1,0 +1,17 @@
+{
+  "Main" : {
+    "author_name" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Author Name"
+      }
+    },
+    "author_link" : {
+      "type" : "Link",
+      "config" : {
+        "allowTargetBlank" : true,
+        "label" : "Author Link"
+      }
+    }
+  }
+}

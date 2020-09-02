@@ -1,0 +1,17 @@
+{
+  "Main" : {
+    "illustrator_name" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Illustrator Name"
+      }
+    },
+    "illustrator_link" : {
+      "type" : "Link",
+      "config" : {
+        "allowTargetBlank" : true,
+        "label" : "Illustrator Link"
+      }
+    }
+  }
+}
