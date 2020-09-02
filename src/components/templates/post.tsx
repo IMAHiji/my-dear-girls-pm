@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import BookInformation from '../BookInformation';
 import Layout from '../layout';
 import SliceParser from '../SliceParser';
+import CategoryDisplay from '../CategoryDisplay';
 
 const useStyles = makeStyles((theme: Theme) => ({
   featuredImage: {
@@ -40,11 +41,11 @@ const makeIllustratorData = (rawIllustratorData: any) => {
 };
 
 const Post = ({ data: { prismicPost, allPrismicAuthor, allPrismicIllustrator } }: any) => {
+  const { featuredImage, postInfo } = useStyles();
   const authorData = makeAuthorData(allPrismicAuthor.edges);
   const illustratorData = makeIllustratorData(allPrismicIllustrator.edges);
-  console.log(illustratorData);
   const { data } = prismicPost;
-  const { featuredImage, postInfo } = useStyles();
+
   return (
     <Layout>
       <Grid container justify="center" item xs={10} direction="row">
@@ -56,6 +57,10 @@ const Post = ({ data: { prismicPost, allPrismicAuthor, allPrismicIllustrator } }
         </Grid>
 
         <SliceParser slices={data.body} />
+        <Grid item xs={10} className={featuredImage}>
+          <p>Categories</p>
+          <CategoryDisplay categories={data.categories} />
+        </Grid>
       </Grid>
     </Layout>
   );
@@ -77,6 +82,19 @@ export const postQuery = graphql`
         }
         title {
           text
+        }
+        categories {
+          category {
+            document {
+              ... on PrismicCategory {
+                id
+                data {
+                  name
+                }
+                url
+              }
+            }
+          }
         }
         body {
           ... on PrismicPostBodyQuote {
