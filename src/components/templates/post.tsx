@@ -45,7 +45,7 @@ const Post = ({ data: { prismicPost, allPrismicAuthor, allPrismicIllustrator } }
   const authorData = makeAuthorData(allPrismicAuthor.edges);
   const illustratorData = makeIllustratorData(allPrismicIllustrator.edges);
   const { data } = prismicPost;
-
+  console.log('post', data);
   return (
     <Layout>
       <Grid container justify="center" item xs={10} direction="row">
@@ -67,8 +67,8 @@ const Post = ({ data: { prismicPost, allPrismicAuthor, allPrismicIllustrator } }
 };
 export default Post;
 export const postQuery = graphql`
-  query PostBySlug($id: StringQueryOperatorInput = {}) {
-    prismicPost(uid: { eq: "the-princess-and-the-giant" }) {
+  query PostBySlug($id: StringQueryOperatorInput = {}, $uid: String) {
+    prismicPost(uid: { eq: $uid }) {
       uid
       data {
         featured_image {
