@@ -45,7 +45,6 @@ const Post = ({ data: { prismicPost, allPrismicAuthor, allPrismicIllustrator } }
   const authorData = makeAuthorData(allPrismicAuthor.edges);
   const illustratorData = makeIllustratorData(allPrismicIllustrator.edges);
   const { data } = prismicPost;
-  console.log('post', data);
   return (
     <Layout>
       <Grid container justify="center" item xs={10} direction="row">
