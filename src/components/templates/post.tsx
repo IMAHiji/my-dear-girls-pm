@@ -11,6 +11,8 @@ import CategoryDisplay from '../CategoryDisplay';
 const useStyles = makeStyles((theme: Theme) => ({
   featuredImage: {
     margin: theme.spacing(2, 0),
+    maxHeight: '500px',
+    overflow: 'hidden',
   },
 }));
 
@@ -46,7 +48,7 @@ const Post = ({ data: { prismicPost, allPrismicAuthor, allPrismicIllustrator } }
   return (
     <Layout>
       <Grid container justify="center" item xs={10} direction="row">
-        <Grid item md={8} xs={6} className={featuredImage}>
+        <Grid item xs={6} className={featuredImage}>
           <Img fluid={data.featured_image.fluid} />
         </Grid>
         <Grid container item className={featuredImage} justify="center">
