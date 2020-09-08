@@ -52,7 +52,7 @@ const Post = ({ data: { prismicPost, allPrismicAuthor, allPrismicIllustrator } }
         <Grid container item className={featuredImage} justify="center">
           <BookInformation authorData={authorData} illustratorData={illustratorData} title={data.title.text} />
         </Grid>
-        <Grid item xs={10} wrap="wrap" container justify="flex-start">
+        <Grid item xs={10} wrap="wrap" container justify="center">
           <SliceParser slices={data.body} />
         </Grid>
 
