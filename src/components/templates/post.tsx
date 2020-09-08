@@ -3,7 +3,6 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import Grid from '@material-ui/core/Grid/';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import BookInformation from '../BookInformation';
 import Layout from '../layout';
 import SliceParser from '../SliceParser';
@@ -13,7 +12,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   featuredImage: {
     margin: theme.spacing(2, 0),
   },
-  postInfo: {},
 }));
 
 const makeAuthorData = (rawAuthorData: any) => {
@@ -41,7 +39,7 @@ const makeIllustratorData = (rawIllustratorData: any) => {
 };
 
 const Post = ({ data: { prismicPost, allPrismicAuthor, allPrismicIllustrator } }: any) => {
-  const { featuredImage, postInfo } = useStyles();
+  const { featuredImage } = useStyles();
   const authorData = makeAuthorData(allPrismicAuthor.edges);
   const illustratorData = makeIllustratorData(allPrismicIllustrator.edges);
   const { data } = prismicPost;
@@ -54,8 +52,10 @@ const Post = ({ data: { prismicPost, allPrismicAuthor, allPrismicIllustrator } }
         <Grid container item className={featuredImage} justify="center">
           <BookInformation authorData={authorData} illustratorData={illustratorData} title={data.title.text} />
         </Grid>
+        <Grid item xs={10} wrap="wrap" container justify="flex-start">
+          <SliceParser slices={data.body} />
+        </Grid>
 
-        <SliceParser slices={data.body} />
         <Grid item xs={10} className={featuredImage}>
           <p>Categories</p>
           <CategoryDisplay categories={data.categories} />
