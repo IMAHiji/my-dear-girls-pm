@@ -3,10 +3,8 @@ import Img from 'gatsby-image';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -31,6 +29,7 @@ const Image = ({ image }: any) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const { fluid } = image.primary.image;
   const { imageContainerWrapper, buttonWrapper, dialogContentWrapper } = useStyles();
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -38,11 +37,11 @@ const Image = ({ image }: any) => {
     setOpen(false);
   };
   return (
-    <Grid item xs={2} className={imageContainerWrapper}>
+    <Grid item md={3} xs={2} className={imageContainerWrapper}>
       <Button variant="outlined" className={buttonWrapper} onClick={handleClick}>
         <Img fluid={fluid} />
       </Button>
-      <Dialog open={open} onClose={handleCLose} fullWidth>
+      <Dialog open={open} onClose={handleCLose} fullWidth maxWidth="md">
         <DialogContent className={dialogContentWrapper}>
           <Img fluid={fluid} />
         </DialogContent>

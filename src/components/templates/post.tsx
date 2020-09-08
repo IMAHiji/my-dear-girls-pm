@@ -46,7 +46,7 @@ const Post = ({ data: { prismicPost, allPrismicAuthor, allPrismicIllustrator } }
   return (
     <Layout>
       <Grid container justify="center" item xs={10} direction="row">
-        <Grid item xs={4} className={featuredImage}>
+        <Grid item md={8} xs={6} className={featuredImage}>
           <Img fluid={data.featured_image.fluid} />
         </Grid>
         <Grid container item className={featuredImage} justify="center">
